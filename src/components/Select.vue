@@ -19,7 +19,7 @@
 .v-select .material-textbox input[type="search"]:valid ~ .material-label {
   bottom: 32px;
   font-size: 12px;
-  left: -56px;
+  left: 0px;
 }
 /* .v-select .material-textbox .material-textbox:hover > input,
 .v-select .material-textbox input[type="search"]:hover,
