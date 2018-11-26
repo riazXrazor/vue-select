@@ -195,6 +195,11 @@
   position: relative;
   bottom: -14px;
   left: -4px;
+  max-width: 160px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 16px !important;
 }
 .v-select.single .selected-tag {
   background-color: transparent;
@@ -365,7 +370,7 @@
       <div class="vs__selected-options" ref="selectedOptions">
         <slot v-for="option in valueAsArray" name="selected-option-container"
               :option="(typeof option === 'object')?option:{[label]: option}" :deselect="deselect" :multiple="multiple" :disabled="disabled">
-          <span class="selected-tag" v-bind:key="option.index">
+          <span class="selected-tag" v-bind:key="option.index" v-tooltip="getOptionLabel(option)">
             <slot name="selected-option" v-bind="(typeof option === 'object')?option:{[label]: option}">
               {{ getOptionLabel(option) }}
             </slot>
@@ -447,8 +452,12 @@
   import pointerScroll from '../mixins/pointerScroll'
   import typeAheadPointer from '../mixins/typeAheadPointer'
   import ajax from '../mixins/ajax'
+  import VTooltip from 'v-tooltip'
 
   export default {
+    components:{
+      VTooltip
+    },
     mixins: [pointerScroll, typeAheadPointer, ajax],
 
     props: {
