@@ -37,7 +37,7 @@
   transition: all 200ms;
   font-size: 16px;
   color: #757575;
-  z-index: -1;
+  /* z-index: -1; */
 }
 .v-select,
 .v-select * {
@@ -387,7 +387,7 @@
                       :aria-expanded="dropdownOpen"
                       aria-label="Search for option"
               >
-        <span class="material-label">{{ placeholder }}</span>
+        <span v-if="!searchPlaceholder" class="material-label">{{ placeholder }}</span>
       </div>
 
         
