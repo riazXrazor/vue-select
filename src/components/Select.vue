@@ -17,7 +17,7 @@
 }
 .v-select .material-textbox input[type="search"]:focus ~ .material-label,
 .v-select .material-textbox input[type="search"]:valid ~ .material-label {
-  bottom: 32px;
+  bottom: 20px;
   font-size: 12px;
   left: 0px;
 }
@@ -112,6 +112,9 @@
 }
 .v-select .dropdown-toggle.has-value {
   border-bottom: 2px solid #febf10 !important;
+}
+.v-select .dropdown-toggle.has-value .material-label{
+  color:#febf10 !important;
 }
 .v-select .vs__selected-options {
   display: flex;
