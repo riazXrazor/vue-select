@@ -1,7 +1,53 @@
 <style>
+    @colorPrimary: #43a047;
+    @colorSecondary: #439ba0;
+    @colorTertiary: #70a043;
+    @colorTextDark: #212121;
+    @colorTextLight: #757575;
+    @colorDivider: #febf10;
+
   .v-select {
     position: relative;
     font-family: inherit;
+
+    .material-textbox{
+        position:relative;
+        
+        input[type="search"]{
+          width:100%;  
+          outline:none;
+          padding: 8px 0;
+          border: none;
+          border-bottom: 2px solid @colorDivider;
+          background: transparent;
+          cursor: pointer;
+        }
+        input[type="search"]:focus ~ .material-label,
+        input[type="search"]:valid ~ .material-label{
+          bottom: 32px;
+          font-size: 12px;
+
+        }
+        .material-textbox:hover > input,
+        input[type="search"]:hover,
+        input[type="search"]:active,
+        input[type="search"]:focus{
+          border-bottom: 2px solid @colorTextDark;
+        }
+        input[type="search"]:active,
+        input[type="search"]:focus{
+          cursor: text;  
+        }
+        .material-label{
+          position:absolute;
+          display:block;
+          bottom: 8px;
+          transition: all 200ms;
+          font-size: 16px;
+          color: @colorTextLight;
+          z-index: -1;
+        }
+      }
   }
   .v-select,
   .v-select * {
@@ -304,6 +350,8 @@
   .fade-leave-to {
     opacity: 0;
   }
+
+  
 </style>
 
 <template>
@@ -323,29 +371,35 @@
           </span>
         </slot>
 
+
+      <div class="material-textbox">
         <input
-                ref="search"
-                v-model="search"
-                @keydown.delete="maybeDeleteValue"
-                @keyup.esc="onEscape"
-                @keydown.up.prevent="typeAheadUp"
-                @keydown.down.prevent="typeAheadDown"
-                @keydown.enter.prevent="typeAheadSelect"
-                @keydown.tab="onTab"
-                @blur="onSearchBlur"
-                @focus="onSearchFocus"
-                type="search"
-                class="form-control"
-                autocomplete="off"
-                :disabled="disabled"
-                :placeholder="searchPlaceholder"
-                :tabindex="tabindex"
-                :readonly="!searchable"
-                :id="inputId"
-                role="combobox"
-                :aria-expanded="dropdownOpen"
-                aria-label="Search for option"
-        >
+                      ref="search"
+                      v-model="search"
+                      @keydown.delete="maybeDeleteValue"
+                      @keyup.esc="onEscape"
+                      @keydown.up.prevent="typeAheadUp"
+                      @keydown.down.prevent="typeAheadDown"
+                      @keydown.enter.prevent="typeAheadSelect"
+                      @keydown.tab="onTab"
+                      @blur="onSearchBlur"
+                      @focus="onSearchFocus"
+                      type="search"
+                      class="form-control"
+                      autocomplete="off"
+                      :disabled="disabled"
+                      :placeholder="searchPlaceholder"
+                      :tabindex="tabindex"
+                      :readonly="!searchable"
+                      :id="inputId"
+                      role="combobox"
+                      :aria-expanded="dropdownOpen"
+                      aria-label="Search for option"
+              >
+        <span class="material-label">{{ searchPlaceholder }}</span>
+      </div>
+
+        
 
       </div>
       <div class="vs__actions">
