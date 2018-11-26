@@ -107,6 +107,10 @@
   border: 1px solid rgba(60, 60, 60, 0.26);
   border-radius: 4px;
   white-space: normal;
+  position: relative;
+}
+.v-select .dropdown-toggle.has-value {
+  border: 2px solid #febf10 !important;
 }
 .v-select .vs__selected-options {
   display: flex;
@@ -182,6 +186,11 @@
   margin: 4px 2px 0px 2px;
   padding: 0 0.25em;
   transition: opacity .25s;
+  
+  height: 22px !important;
+  position: relative;
+  bottom: -14px;
+  left: -4px;
 }
 .v-select.single .selected-tag {
   background-color: transparent;
@@ -347,7 +356,7 @@
 
 <template>
   <div :dir="dir" class="dropdown v-select" :class="dropdownClasses">
-    <div ref="toggle" @mousedown.prevent="toggleDropdown" class="dropdown-toggle">
+    <div ref="toggle" @mousedown.prevent="toggleDropdown" class="dropdown-toggle" :class="{'has-value': !searchPlaceholder}">
 
       <div class="vs__selected-options" ref="selectedOptions">
         <slot v-for="option in valueAsArray" name="selected-option-container"
