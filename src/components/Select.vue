@@ -11,7 +11,7 @@
   outline: none;
   padding: 8px 0;
   border: none;
-  border-bottom: 2px solid #febf10;
+  /* border-bottom: 2px solid #febf10; */
   background: transparent;
   cursor: pointer;
 }
@@ -20,12 +20,12 @@
   bottom: 32px;
   font-size: 12px;
 }
-.v-select .material-textbox .material-textbox:hover > input,
+/* .v-select .material-textbox .material-textbox:hover > input,
 .v-select .material-textbox input[type="search"]:hover,
 .v-select .material-textbox input[type="search"]:active,
 .v-select .material-textbox input[type="search"]:focus {
   border-bottom: 2px solid #212121;
-}
+} */
 .v-select .material-textbox input[type="search"]:active,
 .v-select .material-textbox input[type="search"]:focus {
   cursor: text;
@@ -387,7 +387,7 @@
                       :aria-expanded="dropdownOpen"
                       aria-label="Search for option"
               >
-        <span class="material-label">{{ searchPlaceholder }}</span>
+        <span class="material-label">{{ placeholder }}</span>
       </div>
 
         
