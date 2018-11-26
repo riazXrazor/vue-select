@@ -178,7 +178,7 @@
 }
 /* Selected Tags */
 .v-select .selected-tag {
-  display: flex;
+  display: inline-block;
   align-items: center;
   background-color: #f0f0f0;
   border: 1px solid #ccc;
