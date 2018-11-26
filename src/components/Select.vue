@@ -4,7 +4,7 @@
   font-family: inherit;
 }
 .v-select .material-textbox {
-  position: relative;
+  /* position: relative; */
 }
 .v-select .material-textbox input[type="search"] {
   width: 100%;
@@ -19,6 +19,7 @@
 .v-select .material-textbox input[type="search"]:valid ~ .material-label {
   bottom: 32px;
   font-size: 12px;
+  left: -56px;
 }
 /* .v-select .material-textbox .material-textbox:hover > input,
 .v-select .material-textbox input[type="search"]:hover,
@@ -110,7 +111,7 @@
   position: relative;
 }
 .v-select .dropdown-toggle.has-value {
-  border: 2px solid #febf10 !important;
+  border-bottom: 2px solid #febf10 !important;
 }
 .v-select .vs__selected-options {
   display: flex;
