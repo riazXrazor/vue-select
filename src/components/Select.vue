@@ -1,357 +1,348 @@
 <style>
-    @colorPrimary: #43a047;
-    @colorSecondary: #439ba0;
-    @colorTertiary: #70a043;
-    @colorTextDark: #212121;
-    @colorTextLight: #757575;
-    @colorDivider: #febf10;
-
-  .v-select {
-    position: relative;
-    font-family: inherit;
-
-    .material-textbox{
-        position:relative;
-        
-        input[type="search"]{
-          width:100%;  
-          outline:none;
-          padding: 8px 0;
-          border: none;
-          border-bottom: 2px solid @colorDivider;
-          background: transparent;
-          cursor: pointer;
-        }
-        input[type="search"]:focus ~ .material-label,
-        input[type="search"]:valid ~ .material-label{
-          bottom: 32px;
-          font-size: 12px;
-
-        }
-        .material-textbox:hover > input,
-        input[type="search"]:hover,
-        input[type="search"]:active,
-        input[type="search"]:focus{
-          border-bottom: 2px solid @colorTextDark;
-        }
-        input[type="search"]:active,
-        input[type="search"]:focus{
-          cursor: text;  
-        }
-        .material-label{
-          position:absolute;
-          display:block;
-          bottom: 8px;
-          transition: all 200ms;
-          font-size: 16px;
-          color: @colorTextLight;
-          z-index: -1;
-        }
-      }
-  }
-  .v-select,
-  .v-select * {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-
-  /* Rtl support - Because we're using a flexbox-based layout, the `dir="rtl"` HTML
+   .v-select {
+  position: relative;
+  font-family: inherit;
+}
+.v-select .material-textbox {
+  position: relative;
+}
+.v-select .material-textbox input[type="search"] {
+  width: 100%;
+  outline: none;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 2px solid #febf10;
+  background: transparent;
+  cursor: pointer;
+}
+.v-select .material-textbox input[type="search"]:focus ~ .material-label,
+.v-select .material-textbox input[type="search"]:valid ~ .material-label {
+  bottom: 32px;
+  font-size: 12px;
+}
+.v-select .material-textbox .material-textbox:hover > input,
+.v-select .material-textbox input[type="search"]:hover,
+.v-select .material-textbox input[type="search"]:active,
+.v-select .material-textbox input[type="search"]:focus {
+  border-bottom: 2px solid #212121;
+}
+.v-select .material-textbox input[type="search"]:active,
+.v-select .material-textbox input[type="search"]:focus {
+  cursor: text;
+}
+.v-select .material-textbox .material-label {
+  position: absolute;
+  display: block;
+  bottom: 8px;
+  transition: all 200ms;
+  font-size: 16px;
+  color: #757575;
+  z-index: -1;
+}
+.v-select,
+.v-select * {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+/* Rtl support - Because we're using a flexbox-based layout, the `dir="rtl"` HTML
      attribute does most of the work for us by rearranging the child elements visually.
    */
-  .v-select[dir="rtl"] .vs__actions {
-    padding: 0 3px 0 6px;
-  }
-  .v-select[dir="rtl"] .dropdown-toggle .clear {
-    margin-left: 6px;
-    margin-right: 0;
-  }
-  .v-select[dir="rtl"] .selected-tag .close {
-    margin-left: 0;
-    margin-right: 2px;
-  }
-  .v-select[dir="rtl"] .dropdown-menu {
-    text-align: right;
-  }
+.v-select[dir="rtl"] .vs__actions {
+  padding: 0 3px 0 6px;
+}
+.v-select[dir="rtl"] .dropdown-toggle .clear {
+  margin-left: 6px;
+  margin-right: 0;
+}
+.v-select[dir="rtl"] .selected-tag .close {
+  margin-left: 0;
+  margin-right: 2px;
+}
+.v-select[dir="rtl"] .dropdown-menu {
+  text-align: right;
+}
+/* Open Indicator */
+.v-select .open-indicator {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  pointer-events: all;
+  transition: all 150ms cubic-bezier(1, -0.115, 0.975, 0.855);
+  transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);
+  opacity: 1;
+  width: 12px;
+  /* To account for extra width from rotating. */
 
-  /* Open Indicator */
-  .v-select .open-indicator {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    pointer-events: all;
-    transition: all 150ms cubic-bezier(1.000, -0.115, 0.975, 0.855);
-    transition-timing-function: cubic-bezier(1.000, -0.115, 0.975, 0.855);
-    opacity: 1;
-    width: 12px; /* To account for extra width from rotating. */
-  }
-  .v-select .open-indicator:before {
-    border-color: rgba(60, 60, 60, .5);
-    border-style: solid;
-    border-width: 3px 3px 0 0;
-    content: '';
-    display: inline-block;
-    height: 10px;
-    width: 10px;
-    vertical-align: text-top;
-    transform: rotate(133deg);
-    transition: all 150ms cubic-bezier(1.000, -0.115, 0.975, 0.855);
-    transition-timing-function: cubic-bezier(1.000, -0.115, 0.975, 0.855);
-    box-sizing: inherit;
-  }
-  /* Open Indicator States */
-  .v-select.open .open-indicator:before {
-    transform: rotate(315deg);
-  }
-  .v-select.loading .open-indicator {
-    opacity: 0;
-  }
+}
+.v-select .open-indicator:before {
+  border-color: rgba(60, 60, 60, 0.5);
+  border-style: solid;
+  border-width: 3px 3px 0 0;
+  content: '';
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  vertical-align: text-top;
+  transform: rotate(133deg);
+  transition: all 150ms cubic-bezier(1, -0.115, 0.975, 0.855);
+  transition-timing-function: cubic-bezier(1, -0.115, 0.975, 0.855);
+  box-sizing: inherit;
+}
+/* Open Indicator States */
+.v-select.open .open-indicator:before {
+  transform: rotate(315deg);
+}
+.v-select.loading .open-indicator {
+  opacity: 0;
+}
+/* Dropdown Toggle */
+.v-select .dropdown-toggle {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  display: flex;
+  padding: 0 0 4px 0;
+  background: none;
+  border: 1px solid rgba(60, 60, 60, 0.26);
+  border-radius: 4px;
+  white-space: normal;
+}
+.v-select .vs__selected-options {
+  display: flex;
+  flex-basis: 100%;
+  flex-grow: 1;
+  flex-wrap: wrap;
+  padding: 0 2px;
+  position: relative;
+}
+.v-select .vs__actions {
+  display: flex;
+  align-items: stretch;
+  padding: 0 6px 0 3px;
+}
+/* Clear Button */
+.v-select .dropdown-toggle .clear {
+  font-size: 23px;
+  font-weight: 700;
+  line-height: 1;
+  color: rgba(60, 60, 60, 0.5);
+  padding: 0;
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+  margin-right: 6px;
+}
+/* Dropdown Toggle States */
+.v-select.searchable .dropdown-toggle {
+  cursor: text;
+}
+.v-select.unsearchable .dropdown-toggle {
+  cursor: pointer;
+}
+.v-select.open .dropdown-toggle {
+  border-bottom-color: transparent;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+/* Dropdown Menu */
+.v-select .dropdown-menu {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 0;
+  width: 100%;
+  overflow-y: scroll;
+  border: 1px solid rgba(0, 0, 0, 0.26);
+  box-shadow: 0px 3px 6px 0px rgba(0, 0, 0, 0.15);
+  border-top: none;
+  border-radius: 0 0 4px 4px;
+  text-align: left;
+  list-style: none;
+  background: #fff;
+}
+.v-select .no-options {
+  text-align: center;
+}
+/* Selected Tags */
+.v-select .selected-tag {
+  display: flex;
+  align-items: center;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  color: #333;
+  line-height: 1.42857143;
+  /* Normalize line height */
 
-  /* Dropdown Toggle */
-  .v-select .dropdown-toggle {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    display: flex;
-    padding: 0 0 4px 0;
-    background: none;
-    border: 1px solid rgba(60, 60, 60, .26);
-    border-radius: 4px;
-    white-space: normal;
-  }
-  .v-select .vs__selected-options {
-    display: flex;
-    flex-basis: 100%;
-    flex-grow: 1;
-    flex-wrap: wrap;
-    padding: 0 2px;
-    position: relative;
-  }
-  .v-select .vs__actions {
-    display: flex;
-    align-items: stretch;
-    padding: 0 6px 0 3px;
-  }
+  margin: 4px 2px 0px 2px;
+  padding: 0 0.25em;
+  transition: opacity .25s;
+}
+.v-select.single .selected-tag {
+  background-color: transparent;
+  border-color: transparent;
+}
+.v-select.single.open .selected-tag {
+  position: absolute;
+  opacity: .4;
+}
+.v-select.single.searching .selected-tag {
+  display: none;
+}
+.v-select .selected-tag .close {
+  margin-left: 2px;
+  font-size: 1.25em;
+  appearance: none;
+  padding: 0;
+  cursor: pointer;
+  background: 0 0;
+  border: 0;
+  font-weight: 700;
+  line-height: 1;
+  color: #000;
+  text-shadow: 0 1px 0 #fff;
+  filter: alpha(opacity=20);
+  opacity: .2;
+}
+.v-select.single.searching:not(.open):not(.loading) input[type="search"] {
+  opacity: .2;
+}
+/* Search Input */
+.v-select input[type="search"]::-webkit-search-decoration,
+.v-select input[type="search"]::-webkit-search-cancel-button,
+.v-select input[type="search"]::-webkit-search-results-button,
+.v-select input[type="search"]::-webkit-search-results-decoration {
+  display: none;
+}
+.v-select input[type="search"]::-ms-clear {
+  display: none;
+}
+.v-select input[type="search"],
+.v-select input[type="search"]:focus {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  line-height: 1.42857143;
+  font-size: 1em;
+  display: inline-block;
+  border: 1px solid transparent;
+  border-left: none;
+  outline: none;
+  margin: 4px 0 0 0;
+  padding: 0 7px;
+  max-width: 100%;
+  background: none;
+  box-shadow: none;
+  flex-grow: 1;
+  width: 0;
+}
+.v-select.unsearchable input[type="search"] {
+  opacity: 0;
+}
+.v-select.unsearchable input[type="search"]:hover {
+  cursor: pointer;
+}
+/* List Items */
+.v-select li {
+  line-height: 1.42857143;
+  /* Normalize line height */
 
-  /* Clear Button */
-  .v-select .dropdown-toggle .clear {
-    font-size: 23px;
-    font-weight: 700;
-    line-height: 1;
-    color: rgba(60, 60, 60, 0.5);
-    padding: 0;
-    border: 0;
-    background-color: transparent;
-    cursor: pointer;
-    margin-right: 6px;
-  }
+}
+.v-select li > a {
+  display: block;
+  padding: 3px 20px;
+  clear: both;
+  color: #333;
+  /* Overrides most CSS frameworks */
 
-  /* Dropdown Toggle States */
-  .v-select.searchable .dropdown-toggle {
-    cursor: text;
-  }
-  .v-select.unsearchable .dropdown-toggle {
-    cursor: pointer;
-  }
-  .v-select.open .dropdown-toggle {
-    border-bottom-color: transparent;
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
-  }
-  /* Dropdown Menu */
-  .v-select .dropdown-menu {
-    display:block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 1000;
-    min-width: 160px;
-    padding: 5px 0;
-    margin: 0;
-    width: 100%;
-    overflow-y: scroll;
-    border: 1px solid rgba(0, 0, 0, .26);
-    box-shadow: 0px 3px 6px 0px rgba(0,0,0,.15);
-    border-top: none;
-    border-radius: 0 0 4px 4px;
-    text-align: left;
-    list-style: none;
-    background: #fff;
-  }
-  .v-select .no-options {
-    text-align: center;
-  }
-  /* Selected Tags */
-  .v-select .selected-tag {
-    display: flex;
-    align-items: center;
-    background-color: #f0f0f0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    color: #333;
-    line-height: 1.42857143; /* Normalize line height */
-    margin: 4px 2px 0px 2px;
-    padding: 0 0.25em;
-    transition: opacity .25s;
-  }
-  .v-select.single .selected-tag {
-    background-color: transparent;
-    border-color: transparent;
-  }
-  .v-select.single.open .selected-tag {
-    position: absolute;
-    opacity: .4;
-  }
-  .v-select.single.searching .selected-tag {
-    display: none;
-  }
-  .v-select .selected-tag .close {
-    margin-left: 2px;
-    font-size: 1.25em;
-    appearance: none;
-    padding: 0;
-    cursor: pointer;
-    background: 0 0;
-    border: 0;
-    font-weight: 700;
-    line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    filter: alpha(opacity=20);
-    opacity: .2;
-  }
-  .v-select.single.searching:not(.open):not(.loading) input[type="search"] {
-    opacity: .2;
-  }
-  /* Search Input */
-  .v-select input[type="search"]::-webkit-search-decoration,
-  .v-select input[type="search"]::-webkit-search-cancel-button,
-  .v-select input[type="search"]::-webkit-search-results-button,
-  .v-select input[type="search"]::-webkit-search-results-decoration {
-    display: none;
-  }
-  .v-select input[type="search"]::-ms-clear {
-    display: none;
-  }
-  .v-select input[type="search"],
-  .v-select input[type="search"]:focus {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    line-height: 1.42857143;
-    font-size: 1em;
-    display: inline-block;
-    border: 1px solid transparent;
-    border-left: none;
-    outline: none;
-    margin: 4px 0 0 0;
-    padding: 0 7px;
-    max-width: 100%;
-    background: none;
-    box-shadow: none;
-    flex-grow: 1;
-    width: 0;
-  }
-  .v-select.unsearchable input[type="search"] {
-    opacity: 0;
-  }
-  .v-select.unsearchable input[type="search"]:hover {
-    cursor: pointer;
-  }
-
-  /* List Items */
-  .v-select li {
-    line-height: 1.42857143; /* Normalize line height */
-  }
-  .v-select li > a {
-    display: block;
-    padding: 3px 20px;
-    clear: both;
-    color: #333; /* Overrides most CSS frameworks */
-    white-space: nowrap;
-  }
-  .v-select li:hover {
-    cursor: pointer;
-  }
-  .v-select .dropdown-menu .active > a {
-    color: #333;
-    background: rgba(50, 50, 50, .1);
-  }
-  .v-select .dropdown-menu > .highlight > a {
-    /*
+  white-space: nowrap;
+}
+.v-select li:hover {
+  cursor: pointer;
+}
+.v-select .dropdown-menu .active > a {
+  color: #333;
+  background: rgba(50, 50, 50, 0.1);
+}
+.v-select .dropdown-menu > .highlight > a {
+  /*
      * required to override bootstrap 3's
      * .dropdown-menu > li > a:hover {} styles
      */
-    background: #5897fb;
-    color: #fff;
-  }
-  .v-select .highlight:not(:last-child) {
-    margin-bottom: 0; /* Fixes Bulma Margin */
-  }
-  /* Loading Spinner */
-  .v-select .spinner {
-    align-self: center;
-    opacity: 0;
-    font-size: 5px;
-    text-indent: -9999em;
-    overflow: hidden;
-    border-top: .9em solid rgba(100, 100, 100, .1);
-    border-right: .9em solid rgba(100, 100, 100, .1);
-    border-bottom: .9em solid rgba(100, 100, 100, .1);
-    border-left: .9em solid rgba(60, 60, 60, .45);
-    transform: translateZ(0);
-    animation: vSelectSpinner 1.1s infinite linear;
-    transition: opacity .1s;
-  }
-  .v-select .spinner,
-  .v-select .spinner:after {
-    border-radius: 50%;
-    width: 5em;
-    height: 5em;
-  }
 
-  /* Disabled state */
-  .v-select.disabled .dropdown-toggle,
-  .v-select.disabled .dropdown-toggle .clear,
-  .v-select.disabled .dropdown-toggle input,
-  .v-select.disabled .selected-tag .close,
-  .v-select.disabled .open-indicator {
-    cursor: not-allowed;
-    background-color: rgb(248, 248, 248);
-  }
+  background: #5897fb;
+  color: #fff;
+}
+.v-select .highlight:not(:last-child) {
+  margin-bottom: 0;
+  /* Fixes Bulma Margin */
 
-  /* Loading Spinner States */
-  .v-select.loading .spinner {
-    opacity: 1;
+}
+/* Loading Spinner */
+.v-select .spinner {
+  align-self: center;
+  opacity: 0;
+  font-size: 5px;
+  text-indent: -9999em;
+  overflow: hidden;
+  border-top: 0.9em solid rgba(100, 100, 100, 0.1);
+  border-right: 0.9em solid rgba(100, 100, 100, 0.1);
+  border-bottom: 0.9em solid rgba(100, 100, 100, 0.1);
+  border-left: 0.9em solid rgba(60, 60, 60, 0.45);
+  transform: translateZ(0);
+  animation: vSelectSpinner 1.1s infinite linear;
+  transition: opacity .1s;
+}
+.v-select .spinner,
+.v-select .spinner:after {
+  border-radius: 50%;
+  width: 5em;
+  height: 5em;
+}
+/* Disabled state */
+.v-select.disabled .dropdown-toggle,
+.v-select.disabled .dropdown-toggle .clear,
+.v-select.disabled .dropdown-toggle input,
+.v-select.disabled .selected-tag .close,
+.v-select.disabled .open-indicator {
+  cursor: not-allowed;
+  background-color: #f8f8f8;
+}
+/* Loading Spinner States */
+.v-select.loading .spinner {
+  opacity: 1;
+}
+/* KeyFrames */
+@-webkit-keyframes vSelectSpinner {
+  0% {
+    transform: rotate(0deg);
   }
-  /* KeyFrames */
-  @-webkit-keyframes vSelectSpinner {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+  100% {
+    transform: rotate(360deg);
   }
-  @keyframes vSelectSpinner {
-    0% {
-      transform: rotate(0deg);
-    }
-    100% {
-      transform: rotate(360deg);
-    }
+}
+@keyframes vSelectSpinner {
+  0% {
+    transform: rotate(0deg);
   }
-  /* Dropdown Default Transition */
-  .fade-enter-active,
-  .fade-leave-active {
-    transition: opacity .15s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+  100% {
+    transform: rotate(360deg);
   }
-  .fade-enter,
-  .fade-leave-to {
-    opacity: 0;
-  }
-
-  
+}
+/* Dropdown Default Transition */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s cubic-bezier(1, 0.5, 0.8, 1);
+}
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
 </style>
 
 <template>
