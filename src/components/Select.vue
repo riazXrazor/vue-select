@@ -974,7 +974,8 @@
           let selected = false
           this.valueAsArray.forEach(value => {
             if (typeof value === 'object') {
-              selected = this.optionObjectComparator(value, option)
+                let res = this.optionObjectComparator(value, option)
+                res?selected=true:null;
             } else if (value === option || value === option[this.index]) {
               selected = true
             }
