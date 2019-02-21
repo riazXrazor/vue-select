@@ -405,7 +405,7 @@
                       :aria-expanded="dropdownOpen"
                       aria-label="Search for option"
               >
-        <span v-if="!searchPlaceholder" class="material-label">{{ placeholder }}</span>
+        <span v-if="!searchPlaceholder" class="material-label">{{ placeholder }}{{placeholder && required ? '*' : ''}}</span>
       </div>
 
         
@@ -538,6 +538,14 @@
       placeholder: {
         type: String,
         default: ''
+      },
+        /**
+         * check the input value is required or not
+         * @type {boolean}
+         */
+      required:{
+          type:Boolean,
+          default:false
       },
 
       /**
